@@ -1,5 +1,6 @@
 package died.guia06;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -9,6 +10,12 @@ public class Alumno implements Comparable<Alumno>{
 	private Integer nroLibreta;
 	private List<Curso> cursando;
 	private List<Curso> aprobados;
+	
+	
+	public Alumno(String nombre, Integer nroLibreta) {
+		this.nombre = nombre;
+		this.nroLibreta = nroLibreta;
+	}
 
 	public int creditosObtenidos() {
 		int total = 0;
@@ -35,19 +42,32 @@ public class Alumno implements Comparable<Alumno>{
 		
 	}
 	
-	public boolean equals(Alumno a) {
-		return (this.nroLibreta == a.nroLibreta);
+	public List<Curso> getCursando(){
+		return this.cursando;
 	}
+	
+	public List<Curso> getAprobados(){
+		return this.aprobados;
+	}
+	
+	@Override
+	public boolean equals(Object a) {
+		return (a instanceof Alumno && ((Alumno) a).nroLibreta.equals(this.nroLibreta));
+	} 
 	
 	
 	public void aprobar(Curso c) {
 		//
+		if(aprobados == null)
+			aprobados = new ArrayList<Curso>();
 		cursando.remove(c);
 		aprobados.add(c);
 	}
 
 	public void inscripcionAceptada(Curso c) {
 		//
+		if(cursando == null)
+			cursando = new ArrayList<Curso>();
 		cursando.add(c);
 		
 	}

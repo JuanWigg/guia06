@@ -33,6 +33,11 @@ public class Curso {
 	}
 	
 	
+	public void setCreditos(Integer creditos) {
+		this.creditos = creditos;
+	}
+	
+	
 	public Integer getCreditos() {
 		return this.creditos;
 	}
