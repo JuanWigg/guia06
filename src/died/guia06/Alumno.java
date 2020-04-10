@@ -28,6 +28,11 @@ public class Alumno implements Comparable<Alumno>{
 		return total;
 	}
 	
+	public Integer getNroLibreta() {
+		return this.nroLibreta;
+	}
+	
+	
 	public int cursosInscriptosEnCicloLectivo(Integer ciclo) {
 		int cursosInscripto=0;
 		if(cursando != null) {

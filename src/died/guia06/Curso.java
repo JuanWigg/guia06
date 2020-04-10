@@ -2,6 +2,7 @@ package died.guia06;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import died.guia06.util.Registro;
@@ -32,6 +33,26 @@ public class Curso {
 		this.log = new Registro();
 	}
 	
+	public Curso(String nombre, Integer cupo, Integer creditos, Integer creditosRequeridos) {
+		super();
+		this.nombre = nombre;
+		this.cupo = cupo;
+		this.creditos = creditos;
+		this.creditosRequeridos = creditosRequeridos;
+		this.inscriptos = new ArrayList<Alumno>();
+		this.log = new Registro();
+	}
+	
+	public Curso(Integer id, String nombre, Integer cupo, Integer creditos, Integer creditosRequeridos) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.cupo = cupo;
+		this.creditos = creditos;
+		this.creditosRequeridos = creditosRequeridos;
+		this.inscriptos = new ArrayList<Alumno>();
+		this.log = new Registro();
+	}
 	
 	public void setCreditos(Integer creditos) {
 		this.creditos = creditos;
@@ -60,7 +81,10 @@ public class Curso {
 	 * @return
 	 */
 	public Boolean inscribir(Alumno a) {
+		Integer credAlumno = a.creditosObtenidos();
+		Integer cursosInscripto = a.cursosInscriptosEnCicloLectivo(this.cicloLectivo);
 		
+		if(credAlumno >= this.creditosRequeridos && cupo > inscriptos.size() && cursosInscripto <= 2) {
 			try {
 				log.registrar(this, "inscribir ",a.toString());
 				return true;
@@ -69,6 +93,11 @@ public class Curso {
 				System.out.println("Hubo un error al inscribir el alumno");
 				return false;
 			}
+		}
+		else {
+			System.out.println("El alumno no cumple con los requisitos para inscribirse al curso");
+			return false;
+		}
 			
 		
 	}
@@ -77,14 +106,57 @@ public class Curso {
 	/**
 	 * imprime los inscriptos en orden alfabetico
 	 */
-	public void imprimirInscriptos() {
+	public void imprimirAlfabeticamenteInscriptos() {
 		try {
-		log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+			Collections.sort(this.inscriptos);
+			System.out.println("Alumnos inscriptos ordenados alfabeticamente: ");
+			for(Alumno a : inscriptos ) {
+				System.out.println(a);
+			}
 		}
 		catch(IOException e){
 			System.out.println("Hubo un error al intentar imprimir el listado");
 			
 		}
+	}
+	/**
+	 * imprime los inscriptos por orden de libreta ( 1 - 24026, 2 - 25320, 3 - 25415, ...)
+	 */
+	public void imprimirPorLibretaInscriptos() {
+		try {
+			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+			CompararAlumnoLU comparador = new CompararAlumnoLU();
+			Collections.sort(this.inscriptos, comparador);
+			System.out.println("Alumnos inscriptos ordenados por libreta: ");
+			for(Alumno a : inscriptos ) {
+				System.out.println(a);
+			}
+		}
+		catch(IOException e){
+				System.out.println("Hubo un error al intentar imprimir el listado");
+				
+		}
+	}
+	
+	/** 
+	 * imprime los inscriptos por creditos descendentemente (1 - 250, 2 - 120, 3 - 90 ...) 
+	*/
+	public void imprimirPorCreditosInscriptos() {
+		try {
+			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
+			CompararAlumnoCO comparador = new CompararAlumnoCO();
+			Collections.sort(this.inscriptos, comparador);
+			System.out.println("Alumnos inscriptos ordenados por creditos: ");
+			for(Alumno a : inscriptos ) {
+				System.out.println(a);
+			}
+		}
+		catch(IOException e){
+				System.out.println("Hubo un error al intentar imprimir el listado");
+				
+		}
+		
 	}
 
 
