@@ -10,10 +10,9 @@ public class Alumno {
 	private List<Curso> cursando;
 	private List<Curso> aprobados;
 
-	public int creditosObtenidos() {
-		return 1;
-	}
-
+	
+	
+	
 	public void aprobar(Curso c) {
 		//
 	}
