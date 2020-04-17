@@ -16,7 +16,10 @@ public class Alumno implements Comparable<Alumno>{
 		this.nombre = nombre;
 		this.nroLibreta = nroLibreta;
 	}
-
+	
+	public String getNombre() {
+		return this.nombre;
+	}
 	public int creditosObtenidos() {
 		int total = 0;
 		if(aprobados != null) {
@@ -34,15 +37,15 @@ public class Alumno implements Comparable<Alumno>{
 	
 	
 	public int cursosInscriptosEnCicloLectivo(Integer ciclo) {
+		
 		int cursosInscripto=0;
 		if(cursando != null) {
 			for(Curso c : this.cursando) {
-				if(c.getCicloLectivo() == ciclo) {
+				if(c.getCicloLectivo().equals(ciclo)) {
 					cursosInscripto++;
 				}
 			}
 		}
-		
 		return cursosInscripto;
 		
 	}

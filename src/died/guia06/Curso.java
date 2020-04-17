@@ -58,6 +58,9 @@ public class Curso {
 		this.creditos = creditos;
 	}
 	
+	public void setCicloLectivo(Integer cicloLectivo) {
+		this.cicloLectivo = cicloLectivo;
+	}
 	
 	public Integer getCreditos() {
 		return this.creditos;
@@ -83,10 +86,13 @@ public class Curso {
 	public Boolean inscribir(Alumno a) {
 		Integer credAlumno = a.creditosObtenidos();
 		Integer cursosInscripto = a.cursosInscriptosEnCicloLectivo(this.cicloLectivo);
-		
 		if(credAlumno >= this.creditosRequeridos && cupo > inscriptos.size() && cursosInscripto <= 2) {
 			try {
 				log.registrar(this, "inscribir ",a.toString());
+				if(inscriptos == null)
+					inscriptos = new ArrayList<Alumno>();
+				a.inscripcionAceptada(this);
+				inscriptos.add(a);
 				return true;
 			}
 			catch(IOException e){
@@ -112,7 +118,7 @@ public class Curso {
 			Collections.sort(this.inscriptos);
 			System.out.println("Alumnos inscriptos ordenados alfabeticamente: ");
 			for(Alumno a : inscriptos ) {
-				System.out.println(a);
+				System.out.println(a.getNombre());
 			}
 		}
 		catch(IOException e){
@@ -130,7 +136,7 @@ public class Curso {
 			Collections.sort(this.inscriptos, comparador);
 			System.out.println("Alumnos inscriptos ordenados por libreta: ");
 			for(Alumno a : inscriptos ) {
-				System.out.println(a);
+				System.out.println(a.getNombre());
 			}
 		}
 		catch(IOException e){
@@ -149,7 +155,8 @@ public class Curso {
 			Collections.sort(this.inscriptos, comparador);
 			System.out.println("Alumnos inscriptos ordenados por creditos: ");
 			for(Alumno a : inscriptos ) {
-				System.out.println(a);
+				
+				System.out.println(a.getNombre());
 			}
 		}
 		catch(IOException e){
