@@ -33,12 +33,13 @@ public class Curso {
 		this.log = new Registro();
 	}
 	
-	public Curso(String nombre, Integer cupo, Integer creditos, Integer creditosRequeridos) {
+	public Curso(String nombre, Integer cupo, Integer creditos, Integer creditosRequeridos, Integer cicloLectivo) {
 		super();
 		this.nombre = nombre;
 		this.cupo = cupo;
 		this.creditos = creditos;
 		this.creditosRequeridos = creditosRequeridos;
+		this.cicloLectivo = cicloLectivo;
 		this.inscriptos = new ArrayList<Alumno>();
 		this.log = new Registro();
 	}
@@ -58,9 +59,6 @@ public class Curso {
 		this.creditos = creditos;
 	}
 	
-	public void setCicloLectivo(Integer cicloLectivo) {
-		this.cicloLectivo = cicloLectivo;
-	}
 	
 	public Integer getCreditos() {
 		return this.creditos;
@@ -153,7 +151,7 @@ public class Curso {
 			log.registrar(this, "imprimir listado",this.inscriptos.size()+ " registros ");
 			CompararAlumnoCO comparador = new CompararAlumnoCO();
 			Collections.sort(this.inscriptos, comparador);
-			System.out.println("Alumnos inscriptos ordenados por creditos: ");
+			System.out.println("Alumnos inscriptos ordenados por creditos (ascendente): ");
 			for(Alumno a : inscriptos ) {
 				
 				System.out.println(a.getNombre());

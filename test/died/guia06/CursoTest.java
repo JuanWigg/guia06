@@ -29,15 +29,11 @@ class CursoTest {
 		
 		
 		//Para el test de ciclo lectivo
-		c1 = new Curso("Gestion", 3, 10, 0);
-		c4 = new Curso("manicura", 1, 10, 0);
-		c5 = new Curso("fotografia", 2, 10, 0);
-		c6 = new Curso("comida", 2, 10, 0);
-		c1.setCicloLectivo(2015);
-		c4.setCicloLectivo(2015);
-		c5.setCicloLectivo(2015);
-		c6.setCicloLectivo(2015);
-		
+		c1 = new Curso("Gestion", 3, 10, 0, 2015);
+		c4 = new Curso("manicura", 1, 10, 0, 2015);
+		c5 = new Curso("fotografia", 2, 10, 0, 2015);
+		c6 = new Curso("comida", 2, 10, 0, 2015);
+
 		//Para  el test de cupo lleno
 		a1 = new Alumno("Jose", 11111);
 		a2 = new Alumno("Juan",22222);
@@ -48,8 +44,8 @@ class CursoTest {
 		c1.inscribir(a3);
 		
 		//Para el test de creditos insuficientes
-		c2 = new Curso ("Tutoria epica", 3, 10, 25);
-		c3 = new Curso ("Ingles 80", 3, 1, 10);
+		c2 = new Curso ("Tutoria epica", 3, 10, 25, 2015);
+		c3 = new Curso ("Ingles 80", 3, 1, 10, 2015);
 		/*
 		System.setOut(new PrintStream(outContent));
 	    System.setErr(new PrintStream(errContent));
@@ -108,7 +104,7 @@ class CursoTest {
 		a2.aprobar(c4);
 		 
 		c1.imprimirPorCreditosInscriptos();
-		assertEquals(0, "Alumnos inscriptos ordenados por creditos: \nGabriela\nJuan\nJose\n".compareTo(outContent.toString()));
+		assertEquals(0, "Alumnos inscriptos ordenados por creditos (ascendente): \nGabriela\nJuan\nJose\n".compareTo(outContent.toString()));
 	}
 	
 	@AfterEach
