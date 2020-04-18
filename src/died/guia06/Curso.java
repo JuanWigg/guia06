@@ -81,6 +81,34 @@ public class Curso {
 	 * @param a
 	 * @return
 	 */
+	public void inscribirAlumno(Alumno a) throws CupoInsuficienteException, CreditosInsuficientesException, CursadoCompletoException, RegistroAuditoriaException{
+		Integer credAlumno = a.creditosObtenidos();
+		Integer cursosInscripto = a.cursosInscriptosEnCicloLectivo(this.cicloLectivo);
+		if(credAlumno <= this.creditosRequeridos)
+			throw (new CreditosInsuficientesException());
+		
+		if(cupo == inscriptos.size())
+			throw (new CupoInsuficienteException());
+		
+		if(cursosInscripto >= 3)
+			throw (new CursadoCompletoException());
+		
+		try {
+			log.registrar(this, "inscribir ",a.toString());
+			if(inscriptos == null)
+				inscriptos = new ArrayList<Alumno>();
+			a.inscripcionAceptada(this);
+			inscriptos.add(a);
+		}
+		catch(IOException e){
+			throw (new RegistroAuditoriaException());
+		}
+		
+		
+		
+	}
+	
+	
 	public Boolean inscribir(Alumno a) {
 		Integer credAlumno = a.creditosObtenidos();
 		Integer cursosInscripto = a.cursosInscriptosEnCicloLectivo(this.cicloLectivo);
