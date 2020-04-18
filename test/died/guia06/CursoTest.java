@@ -1,7 +1,9 @@
 package died.guia06;
 
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
+
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -56,9 +59,24 @@ class CursoTest {
 		
 	}
 	
+	@Test
+	void testCupoLlenoException() {
+		Assertions.assertThrows(CupoInsuficienteException.class,() -> c1.inscribirAlumno(a4));
+	}
 	
+	@Test
+	void testCreditosInsuficientesException() {
+		Assertions.assertThrows(CreditosInsuficientesException.class, () -> c2.inscribirAlumno(a4));
+	}
+	
+	@Test
+	void testCursadoCompletoException() {
+		Assertions.assertThrows(CursadoCompletoException.class, () -> c6.inscribirAlumno(a1));
+	}
 
 	
+	
+	/*   METODOS VIEJOS
 	@Test
 	void testCupoLleno() {
 		assertFalse("Deberia haber dado falso, no tiene mas cupo", c1.inscribir(a4));
@@ -75,7 +93,7 @@ class CursoTest {
 	void testYaCursa3CicloLectivo() {
 		assertFalse("Deberia haber dado falso, ya esta cursando 3 materias con ciclo 2015", c6.inscribir(a1));
 	}
-
+*/
 	@Test
 	void imprimirAlfabeticamente() {
 	

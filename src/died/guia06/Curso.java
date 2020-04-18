@@ -84,7 +84,7 @@ public class Curso {
 	public void inscribirAlumno(Alumno a) throws CupoInsuficienteException, CreditosInsuficientesException, CursadoCompletoException, RegistroAuditoriaException{
 		Integer credAlumno = a.creditosObtenidos();
 		Integer cursosInscripto = a.cursosInscriptosEnCicloLectivo(this.cicloLectivo);
-		if(credAlumno <= this.creditosRequeridos)
+		if(credAlumno < this.creditosRequeridos)
 			throw (new CreditosInsuficientesException());
 		
 		if(cupo == inscriptos.size())
